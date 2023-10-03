@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 
 global.__basedir = __dirname;
 
-mongoose.connect(process.env.MONGODB_LOCAL_SERVER, {
+const DB = process.env.MONGODB_CLOUD_URL.replace('<PASSWORD>', process.env.MONGODB_CLOUD_PASSWROD)
+
+mongoose.connect(DB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
