@@ -1,5 +1,5 @@
 const { response } = require("express");
-const paymentSession = require("ssl-commerz-node").PaymentSession;
+const PaymentSession = require("ssl-commerz-node").PaymentSession;
 const { Order } = require("../models/Order");
 const { Payment } = require("../models/Payment");
 const fetch = require("node-fetch");
@@ -75,10 +75,10 @@ module.exports.initPayment = async (req, res) => {
 
     // Set the urls
     payment.setUrls({
-        success: 'https://secret-stream-23319.herokuapp.com/api/payment/success', // If payment Succeed
+        success: 'https://burger-builder-wks9.onrender.com/api/payment/success', // If payment Succeed
         fail: 'yoursite.com/fail', // If payment failed
         cancel: 'yoursite.com/cancel', // If user cancel payment
-        ipn: 'https://secret-stream-23319.herokuapp.com/api/payment/ipn' // SSLCommerz will send http post request in this link
+        ipn: 'https://burger-builder-wks9.onrender.com/api/payment/ipn' // SSLCommerz will send http post request in this link
     });
 
     // Set order details
