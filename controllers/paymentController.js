@@ -13,7 +13,7 @@ module.exports.ipn = async (req, res) => {
     const payment = new Payment(req.body);
     const tran_id = payment['tran_id'];
     if (payment['status'] === 'VALID') {
-        const order = await Order.updateOne({ transactionId: tran_id }, { status: 'Paid according to users' });
+        await Order.updateOne({ transactionId: tran_id }, { status: 'Paid according to users' });
     } else {
         await Order.deleteOne({ transaction_id: tran_id });
     }
@@ -34,8 +34,7 @@ module.exports.ipn = async (req, res) => {
         .then(res => res.json())
         .then(async (data) => {
             if (data["status"] === "VALID" || "VALIDATED") {
-                Order.updateOne({ transaction_id: tran_id }, { validatePayment: true })
-                await Purchase.updateOne({ transaction_id: tran_id }, { validatePayment: true })  
+                await Order.updateOne({ transaction_id: tran_id }, { validatePayment: true })  
                 return res.status(200).send({
                     message: "Validation complete!",
                     data: data
@@ -125,9 +124,10 @@ module.exports.initPayment = async (req, res) => {
     response = await payment.paymentInit();
 
     if (response.status === "SUCCESS") {
-        await Order.updateOne({ _id: orderId }, { sessionKey: response["sessionKey"], transactionId: tran_id })
+        await Order.updateOne({ _id: orderId }, { sessionKey: response["sessionkey"], transactionId: tran_id })
     }
 
+    // console.log("ssl response ", response)
     return res.status(200).send(response);
 }
 
