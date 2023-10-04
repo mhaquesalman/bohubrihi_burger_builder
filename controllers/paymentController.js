@@ -106,7 +106,7 @@ module.exports.initPayment = async (req, res) => {
     payment.setShippingInfo({
         method: 'Courier', //Shipping method of the order. Example: YES or NO or Courier
         num_item: total_item,
-        name: req.user.name,
+        name: req.user.email,
         add1: customer.deliveryAddress,
         add2: customer.deliveryAddress,
         city: customer.city,
