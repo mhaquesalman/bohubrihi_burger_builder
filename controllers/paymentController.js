@@ -15,7 +15,7 @@ module.exports.ipn = async (req, res) => {
     if (payment['status'] === 'VALID') {
         await Order.updateOne({ transactionId: tran_id }, { status: 'Paid according to users' });
     } else {
-        await Order.deleteOne({ transaction_id: tran_id });
+        await Order.deleteOne({ transactionId: tran_id });
     }
     await payment.save();
     if (payment["status"] === "VALID") {
@@ -34,7 +34,7 @@ module.exports.ipn = async (req, res) => {
         .then(res => res.json())
         .then(async (data) => {
             if (data["status"] === "VALID" || "VALIDATED") {
-                await Order.updateOne({ transaction_id: tran_id }, { validatePayment: true })  
+                await Order.updateOne({ transactionId: tran_id }, { validatePayment: true })  
                 return res.status(200).send({
                     message: "Validation complete!",
                     data: data

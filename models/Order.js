@@ -20,7 +20,10 @@ const orderSchema = Schema({
     },
     orderTime: { type: Date, default: Date.now() },
     sessionKey: { type: String, default: "" },
-    transactionId: { type: String, default: "" },
+    transactionId: { 
+        type: String, 
+        default: "", 
+    },
     validatePayment: { type: Boolean, default: false }
 })
 
