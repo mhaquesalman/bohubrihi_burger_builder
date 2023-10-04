@@ -63,6 +63,9 @@ module.exports.initPayment = async (req, res) => {
     const orderId = req.query.oid;
     const order = await Order.findOne({ userId: userId, _id: orderId });
 
+    console.log("order ", order)
+    console.log("order id ", orderId)
+
     const { customer, price, ingredients } = order;
 
     const total_amount = price
@@ -123,7 +126,13 @@ module.exports.initPayment = async (req, res) => {
         product_profile: 'food'
     });
 
-    response = await payment.paymentInit();
+    try {
+        response = await payment.paymentInit();
+        console.log("ssl response ", response)
+    } catch (err) {
+        console.log("ssl error ", err)
+    }
+
 
     if (response.status === "SUCCESS") {
         await Order.updateOne({ _id: orderId }, { sessionKey: response["sessionKey"], transactionId: tran_id })
