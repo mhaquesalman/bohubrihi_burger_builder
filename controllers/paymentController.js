@@ -95,8 +95,8 @@ module.exports.initPayment = async (req, res) => {
         add1: customer.deliveryAddress,
         add2: customer.deliveryAddress,
         city: customer.city,
-        state: "",
-        postcode: "",
+        state: "DHAKA",
+        postcode: "1000",
         country: "BD",
         phone: customer.phone,
         fax: ""
@@ -110,8 +110,8 @@ module.exports.initPayment = async (req, res) => {
         add1: customer.deliveryAddress,
         add2: customer.deliveryAddress,
         city: customer.city,
-        state: "",
-        postcode: "",
+        state: "DHAKA",
+        postcode: "1000",
         country: "BD",
     });
 
